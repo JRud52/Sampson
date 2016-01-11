@@ -91,6 +91,8 @@
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>
       </SubSystem>
+      <ProgramDatabaseFile />
+      <GenerateDebugInformation>No</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -113,6 +115,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ProgramDatabaseFile />
+      <GenerateDebugInformation>No</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -129,13 +133,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\graphics\sprite.cpp" />
+    <ClCompile Include="src\shaders\shader.cpp" />
     <ClCompile Include="src\graphics\window.cpp" />
+    <ClCompile Include="src\input\input.cpp" />
     <ClCompile Include="src\math\vec2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\sprite.h" />
+    <ClInclude Include="src\shaders\shader.h" />
     <ClInclude Include="src\graphics\window.h" />
+    <ClInclude Include="src\input\input.h" />
     <ClInclude Include="src\math\vec2.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\shaders\shader.frag" />
+    <None Include="src\shaders\shader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
