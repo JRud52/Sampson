@@ -1,12 +1,11 @@
 #include "src/graphics/window.h"
-#include "src/math/math.h"
-
+#include "src\math\vec2.h"
 
 int main()
 {
 	using namespace sampson;
 	using namespace graphics;
-	using namespace glm;
+	using namespace math;
 
 	Window window("Sampson v0.1a", 960, 540);
 	glClearColor(0.2f, 0.3f, 0.8f, 1.0f);
@@ -16,15 +15,16 @@ int main()
 	glBindVertexArray(vao);
 
 	vec2 a(1.0f, 2.0f);
-	vec3 b(2.0f, 1.0f, 3.0f);
-	vec4 c(2.0f, 1.0f, 4.0f, 3.0f);
+	vec2 b(2.0f, 1.0f);
 
-	//std::cout << c << std::endl;
+	std::cout << a << std::endl;
 
 	while (!window.closed())
 	{
 		window.clear();
 		
+		
+
 #if 1
 		glBegin(GL_QUADS);
 		glVertex2f(-0.5f, -0.5f);
