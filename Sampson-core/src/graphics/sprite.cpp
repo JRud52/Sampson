@@ -29,8 +29,8 @@ Sprite::~Sprite()
 void Sprite::Init()
 {
 
-	m_Shader = &Shader((GLchar*)"D:/Justin/Documents/Visual Studio 2015/Projects/Sampson/Sampson-core/src/shaders/shaders_default/default_textured.vert",
-		(GLchar*)"D:/Justin/Documents/Visual Studio 2015/Projects/Sampson/Sampson-core/src/shaders/shaders_default/default_textured.frag");
+	m_Shader = &Shader((GLchar*)"src/shaders/shaders_default/default_textured.vert",
+		(GLchar*)"src/shaders/shaders_default/default_textured.frag");
 
 	GLfloat vertices[] = {
 		// Positions          // Texture Coords
@@ -78,7 +78,7 @@ void Sprite::Init()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	// Load image, create texture and generate mipmaps
 	int width, height;
-	unsigned char* image = SOIL_load_image("D:/Justin/Documents/Visual Studio 2015/Projects/Sampson/Sampson-core/src/textures/awesomeface.png", &width, &height, 0, SOIL_LOAD_RGB);
+	unsigned char* image = SOIL_load_image("src/textures/awesomeface.png", &width, &height, 0, SOIL_LOAD_RGB);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	SOIL_free_image_data(image);
