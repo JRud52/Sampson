@@ -27,10 +27,16 @@
     <ClCompile Include="src\math\vec2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\sprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\vec3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\shaders\shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\sprite.cpp">
+    <ClCompile Include="src\shaders\material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,15 +50,23 @@
     <ClInclude Include="src\math\vec2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\graphics\sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\vec3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\shaders\shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\sprite.h">
+    <ClInclude Include="src\shaders\material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\shaders\shader.vert" />
-    <None Include="src\shaders\shader.frag" />
+    <None Include="src\shaders\shaders_default\default_textured.vert" />
+    <None Include="src\shaders\shaders_default\default_textured.frag" />
+    <None Include="src\shaders\shaders_default\default_basic.frag" />
+    <None Include="src\shaders\shaders_default\default_basic.vert" />
   </ItemGroup>
 </Project>

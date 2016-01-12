@@ -1,34 +1,59 @@
 #include "graphics/window.h"
 #include "input/input.h"
-#include "math/vec2.h"
-#include "shaders/shader.h"
+#include <GLM/vec2.hpp>
+#include "graphics/sprite.h"
+//#include "shaders/shader.h"
 
 
 int main()
 {
-	using namespace sampson;
-	using namespace graphics;
-	using namespace math;
-	using namespace input;
 
-	Window window("Sampson v0.1a", 960, 540);
+	Window window("Sampson Engine v0.1a", 960, 540);
 	Input input(&window);
 	
 	glClearColor(0.2f, 0.3f, 0.8f, 1.0f);
 
 	GLfloat speedV = 0.0f;
 	GLfloat speedH = 0.0f;
-	GLfloat positionPos = 0.5f;
-	GLfloat positionNeg = -0.5f;
 
-	vec2 topLeft(-0.5f, -0.5f);
-	vec2 topRight(-0.5f, 0.5f);
-	vec2 bottomRight(0.5f, 0.5f);
-	vec2 bottomLeft(0.5f, -0.5f);
 
-	GLuint vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
+
+
+
+	
+
+	// Set up vertex data (and buffer(s)) and attribute pointers
+	//GLfloat vertices[] = {
+		// Positions         // Colors
+	//	0.5f, -0.5f, 0.0f,   1.0f, 0.0f, 0.0f,  // Bottom Right
+	//	-0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,  // Bottom Left
+	//	0.0f,  0.5f, 0.0f,   0.0f, 0.0f, 1.0f   // Top 
+	//};
+	//GLuint VBO, VAO;
+	//glGenVertexArrays(1, &VAO);
+	//glGenBuffers(1, &VBO);
+	// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
+	//glBindVertexArray(VAO);
+
+	//glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	// Position attribute
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
+	//glEnableVertexAttribArray(0);
+	// Color attribute
+	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	//glEnableVertexAttribArray(1);
+
+	//glBindVertexArray(0); // Unbind VAO
+
+
+
+
+
+
+
+	Sprite sprite1( glm::vec2(0.0f, 0.0f), (GLfloat)0.0f, (GLint)0);
 
 	while (!window.shouldClose())
 	{
@@ -68,26 +93,26 @@ int main()
 		speedV *= window.deltaTime() * 100;
 		speedH *= window.deltaTime() * 100;
 
-		topLeft.x += speedH;
-		topRight.x += speedH;
-		bottomRight.x += speedH;
-		bottomLeft.x += speedH;
 
-		topLeft.y += speedV;
-		topRight.y += speedV;
-		bottomRight.y += speedV;
-		bottomLeft.y += speedV;
 
-#if 1
-		glBegin(GL_QUADS);
-		glVertex2f(topLeft.x, topLeft.y);
-		glVertex2f(topRight.x, topRight.y);
-		glVertex2f(bottomRight.x, bottomRight.y);
-		glVertex2f(bottomLeft.x, bottomLeft.y);
-		glEnd();
-#else
-		glDrawArrays(GL_ARRAY_BUFFER, 0, 6);
-#endif
+
+
+		//m_Shader->Use();
+
+		//glUseProgram(shaderProgram);
+		////glBindVertexArray(VAO);
+		//glDrawArrays(GL_TRIANGLES, 0, 3);
+		//glBindVertexArray(0);
+
+
+
+
+
+
+
+
+
+		sprite1.Draw();
 		
 
 		speedV = 0.0f;
