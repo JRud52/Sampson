@@ -9,6 +9,7 @@ Window::Window(const char *title, int width, int height)
 	m_Title = title;
 	m_Height = height;
 	m_Width = width;
+	m_BackgroundColor = glm::vec4(0, 0, 0, 1.0f);
 	if (!Init())
 		glfwTerminate();
 }
@@ -49,33 +50,35 @@ bool Window::Init()
 
 	std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
 
-	m_deltaTime = 0.0f;
-	m_lastFrame = 0.0f;
-	m_currentFrame = 0.0f;
+	m_DeltaTime = 0.0f;
+	m_LastFrame = 0.0f;
+	m_CurrentFrame = 0.0f;
 
 	return true;
 }
 
 void Window::clear() const
 {
-
+	glClearColor(m_BackgroundColor.x, m_BackgroundColor.y, m_BackgroundColor.z, m_BackgroundColor.w);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Window::update()
 {
+	GLenum error = glGetError();
+	if (error != GL_NO_ERROR)
+		std::cout << "OpenGl Error: " << error << std::endl;
+
 	glfwPollEvents();
-	//glfwGetFramebufferSize(m_Window, &m_Width, &m_Height);
-	m_currentFrame = glfwGetTime();
-	m_deltaTime = m_currentFrame - m_lastFrame;
-	m_lastFrame = m_currentFrame;
+	m_CurrentFrame = glfwGetTime();
+	m_DeltaTime = m_CurrentFrame - m_LastFrame;
+	m_LastFrame = m_CurrentFrame;
 
 	glfwSwapBuffers(m_Window);
 }
 
 void Window::close()
 {
-	m_Close = true;
 	glfwSetWindowShouldClose(m_Window, GL_TRUE);
 }
 
@@ -84,3 +87,7 @@ void window_resize(GLFWwindow *window, int width, int height)
 	glViewport(0, 0, width, height);
 }
 
+void Window::setBackgroundColor(glm::vec3 color)
+{
+	m_BackgroundColor = glm::vec4(color, 1.0f);
+}

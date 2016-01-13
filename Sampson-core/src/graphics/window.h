@@ -3,6 +3,7 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <GLM/glm.hpp>
 
 
 
@@ -12,11 +13,12 @@ private:
 	const char *m_Title;
 	int m_Width, m_Height;
 	GLFWwindow *m_Window;
-	bool m_Close;
 
-	GLfloat m_lastFrame;
-	GLfloat m_deltaTime;
-	GLfloat m_currentFrame;
+	GLfloat m_LastFrame;
+	GLfloat m_DeltaTime;
+	GLfloat m_CurrentFrame;
+
+	glm::vec4 m_BackgroundColor;
 
 public:
 	Window(const char *name, int width, int height);
@@ -24,10 +26,12 @@ public:
 	void clear() const;
 	void update();
 	void close();
+	
+	void setBackgroundColor(glm::vec3 color);
 
 	inline GLFWwindow* getWindow() const { return m_Window; }
-	inline GLfloat deltaTime() const { return m_deltaTime; }
-	inline bool shouldClose() const { return m_Close; }
+	inline GLfloat deltaTime() const { return m_DeltaTime; }
+	inline bool shouldClose() const { return glfwWindowShouldClose(m_Window); }
 
 private:
 	bool Init();

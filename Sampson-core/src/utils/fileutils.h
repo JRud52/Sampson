@@ -5,23 +5,25 @@
 #include <sstream>
 #include <iostream>
 
-std::string read_file(const char* filepath)
-{
-	std::string filestring;
-	std::ifstream file;
-	file.exceptions(std::ifstream::badbit);
-	try
+class FileUtils {
+public:
+	static std::string read_file(const char* filepath)
 	{
-		file.open(filepath);
-		std::stringstream stream;
-		stream << file.rdbuf();
-		file.close();
-		filestring = stream.str();
+		std::string filestring;
+		std::ifstream file;
+		file.exceptions(std::ifstream::badbit);
+		try
+		{
+			file.open(filepath);
+			std::stringstream stream;
+			stream << file.rdbuf();
+			file.close();
+			filestring = stream.str();
+		}
+		catch (std::ifstream::failure e)
+		{
+			std::cout << "File not read successfully!" << std::endl;
+		}
+		return filestring;
 	}
-	catch (std::ifstream::failure e)
-	{
-		std::cout << "File not read successfully!" << std::endl;
-	}
-	return filestring;
-
-}
+};

@@ -1,9 +1,14 @@
 #include "graphics/window.h"
+#include "graphics/shader.h"
+#include "graphics/buffers/buffer.h"
+#include "graphics/buffers/indexbuffer.h"
+#include "graphics/buffers/vertexarray.h"
+
 #include "input/input.h"
-#include <GLM/vec2.hpp>
-#include "graphics/sprite.h"
-#include "utils/fileutils.h"
-//#include "shaders/shader.h"
+
+#include <GLM/glm.hpp>
+#include <GLM/gtc/matrix_transform.hpp>
+#include <GLM/gtc/type_ptr.hpp>
 
 
 int main()
@@ -11,71 +16,96 @@ int main()
 	Window window("Sampson Engine v0.1a", 960, 540);
 	Input input(&window);
 	
-	glClearColor(0.2f, 0.3f, 0.8f, 1.0f);
+	window.setBackgroundColor(glm::vec3(0.1f, 0.3f, 0.3f));
 
-	GLfloat speedV = 0.0f;
-	GLfloat speedH = 0.0f;
+#if 0
+	GLfloat vertices[]{
+		0, 0, 0, 
+		8, 0, 0, 
+		0, 3, 0,
+		0, 3, 0,
+		8, 3, 0,
+		8, 0, 0
+	};
+	
+	GLuint vbo;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(0);
+#else
+	GLfloat vertices[] = {
+		0, 0, 0,
+		0, 3, 0,
+		8, 3, 0,
+		8, 0, 0
+	};
+	GLushort indices[] = {
+		0, 1, 2,
+		2, 3, 0
+	};
+	GLfloat colorsA[] = {
+		1, 0, 1, 1,
+		1, 0, 1, 1,
+		1, 0, 1, 1,
+		1, 0, 1, 1
+	};
+	GLfloat colorsB[] = {
+		0.2f, 0.3f, 0.8f, 1,
+		0.2f, 0.3f, 0.8f, 1,
+		0.2f, 0.3f, 0.8f, 1,
+		0.2f, 0.3f, 0.8f, 1
+	};
 
+	VertexArray sprite1, sprite2;
+	IndexBuffer ibo(indices, 6);
 
+	sprite1.addBuffer(new Buffer(vertices, 4 * 3, 3), 0);
+	sprite1.addBuffer(new Buffer(colorsA, 4 * 4, 4), 1);
 
+	sprite2.addBuffer(new Buffer(vertices, 4 * 3, 3), 0);
+	sprite2.addBuffer(new Buffer(colorsB, 4 * 4, 4), 1);
 
+#endif
 
-	Sprite sprite1( glm::vec2(0.0f, 0.0f), (GLfloat)0.0f, (GLint)0);
+	glm::mat4 ortho = glm::ortho(0.0f, 16.0f, 0.0f, 9.0f);
+
+	Shader shader("src/shaders/basic.vert", "src/shaders/basic.frag");
+	shader.enable();
+	shader.setUniformMat4("pr_matrix", ortho);
+
+	shader.setUniformMat4("ml_matrix", glm::translate(glm::mat4(), glm::vec3(4,3,0)));
+	shader.setUniform4f("colour", glm::vec4(0.9f, 0.4f, 0.6f, 1.0f));
 
 	while (!window.shouldClose())
 	{
-		window.clear();
-		
-		if (input.isKeyPressed(GLFW_KEY_W)) 
-		{
-			 std::cout << "W key pressed!" << std::endl;
-			 speedV = 0.01f;
-		}
-		if (input.isKeyPressed(GLFW_KEY_A))
-		{
-			std::cout << "A key pressed!" << std::endl;
-			speedH = -0.01f;
-		}
-		if (input.isKeyPressed(GLFW_KEY_S))
-		{
-			std::cout << "S key pressed!" << std::endl;
-			speedV = -0.01f;
-		}
-		if (input.isKeyPressed(GLFW_KEY_D))
-		{
-			std::cout << "D key pressed!" << std::endl;
-			speedH = 0.01f;
-		}
+
 		if (input.isKeyPressed(GLFW_KEY_ESCAPE))
 		{
-			std::cout << "Esc key pressed!" << std::endl;
 			window.close();
 		}
-		if (input.isMouseButtonPressed(GLFW_MOUSE_BUTTON_LEFT))
-			std::cout << "Left mouse button pressed!" << std::endl;
-		if (input.isMouseButtonPressed(GLFW_MOUSE_BUTTON_RIGHT))
-			std::cout << "Right mouse button pressed!" << std::endl;
 
 
-		speedV *= window.deltaTime() * 100;
-		speedH *= window.deltaTime() * 100;
+		window.clear();
+#if 0
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+#else
+		sprite1.bind();
+		ibo.bind();
+		shader.setUniformMat4("ml_matrix", glm::translate(glm::mat4(), glm::vec3(4, 3, 0)));
+		glDrawElements(GL_TRIANGLES, ibo.getCount(), GL_UNSIGNED_SHORT, 0);
+		ibo.unbind();
+		sprite1.unbind();
 
-
-
-
-
-
-
-
-
-
-
-
-		sprite1.Draw();
+		sprite2.bind();
+		ibo.bind();
+		shader.setUniformMat4("ml_matrix", glm::translate(glm::mat4(), glm::vec3(0, 0, 0)));
+		glDrawElements(GL_TRIANGLES, ibo.getCount(), GL_UNSIGNED_SHORT, 0);
+		ibo.unbind();
+		sprite2.unbind();
 		
-
-		speedV = 0.0f;
-		speedH = 0.0f;
+#endif
 
 		window.update();
 	}
