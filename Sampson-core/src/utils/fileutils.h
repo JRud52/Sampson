@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iostream>
 
+//reads in a file and outputs it as a string
 class FileUtils {
 public:
 	static std::string read_file(const char* filepath)

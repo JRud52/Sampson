@@ -18,6 +18,7 @@ protected:
 	Shader& m_Shader;
 
 public:
+	//initialize the renderable2d
 	Renderable2D(glm::vec3 position, glm::vec2 size, glm::vec4 color, Shader& shader)
 		: m_Position(position), m_Size(size), m_Color(color), m_Shader(shader)
 	{
@@ -43,6 +44,7 @@ public:
 		m_IndexBuffer = new IndexBuffer(indices, 6);
 	};
 
+	//free up memory
 	~Renderable2D()
 	{
 		delete m_VertexArray;

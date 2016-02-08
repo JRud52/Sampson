@@ -13,7 +13,6 @@
 #include "graphics/simple2drenderer.h"
 #include "graphics/renderable2d.h"
 
-
 int main()
 {
 	Window window("Sampson Engine v0.1a", 960, 540);

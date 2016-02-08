@@ -1,5 +1,6 @@
 #include "buffer.h"
 
+// initialize the array buffer
 Buffer::Buffer(GLfloat* data, GLsizei count, GLuint componentCount)
 	: m_ComponentCount(componentCount)
 {
@@ -9,11 +10,13 @@ Buffer::Buffer(GLfloat* data, GLsizei count, GLuint componentCount)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+// bind the array buffer
 void Buffer::bind() const
 {
 	glBindBuffer(GL_ARRAY_BUFFER, m_BufferID);
 }
 
+// unbind the array buffer
 void Buffer::unbind() const
 {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
