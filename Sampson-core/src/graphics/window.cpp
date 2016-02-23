@@ -29,6 +29,13 @@ bool Window::Init()
 		return false;
 	}
 
+	//set window hints
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+	glewExperimental = GL_TRUE;
+
 	//create window
 	m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, NULL, NULL);
 	if (!m_Window)
@@ -40,13 +47,12 @@ bool Window::Init()
 	//set context and callback
 	glfwMakeContextCurrent(m_Window);
 	glfwSetWindowUserPointer(m_Window, this);
-	glfwSetWindowSizeCallback(m_Window, window_resize);
+	//glfwSetWindowSizeCallback(m_Window, window_resize);                       //uncomment this line for resize functionality
 
-	//set window hints
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	glewExperimental = GL_TRUE;
+	//enable face culling and blending
+	//glEnable(GL_CULL_FACE);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	//check if glew was initialized
 	if (glewInit() != GLEW_OK)

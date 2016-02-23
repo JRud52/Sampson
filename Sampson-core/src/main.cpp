@@ -1,13 +1,16 @@
 #include "SampsonCoreHeaders.h"
 
+#define WIN_WIDTH 1600
+#define WIN_HEIGHT 900
+
 int main()
 {
-	Window window("Sampson Engine v0.1a", 1600, 900);
+	Window window("Sampson Engine v0.1a", WIN_WIDTH, WIN_HEIGHT);
 	Input input(&window);
 	
 	window.setBackgroundColor(glm::vec3(0.1f, 0.3f, 0.3f));
 
-	glm::mat4 ortho = glm::ortho(0.0f, 1600.0f, 0.0f, 900.0f);
+	glm::mat4 ortho = glm::ortho(0.0f, (float)WIN_WIDTH, 0.0f, (float)WIN_HEIGHT);
 
 	Shader shader("src/shaders/basic.vert", "src/shaders/basic.frag");
 	shader.enable();
@@ -23,16 +26,16 @@ int main()
 
 	int speed = 200;
 
+	Stats stats;
 	while (!window.shouldClose())
 	{
+		 stats.printFPS();
 
 		if (input.isKeyPressed(GLFW_KEY_ESCAPE)) window.close();
-		if (input.isKeyPressed(GLFW_KEY_A)) sprite.position = glm::vec3(sprite.position.x - speed * window.deltaTime(), sprite.position.y, sprite.position.z);   //sprite.setPosition(glm::vec3(0,0,0));
-		if (input.isKeyPressed(GLFW_KEY_D)) sprite.position = glm::vec3(sprite.position.x + speed * window.deltaTime(), sprite.position.y, sprite.position.z);   //sprite.setPosition(glm::vec3(0,0,0));
-		if (input.isKeyPressed(GLFW_KEY_W)) sprite.position = glm::vec3(sprite.position.x, sprite.position.y + speed * window.deltaTime(), sprite.position.z);   //sprite.setPosition(glm::vec3(0,0,0));
-		if (input.isKeyPressed(GLFW_KEY_S)) sprite.position = glm::vec3(sprite.position.x, sprite.position.y - speed * window.deltaTime(), sprite.position.z);   //sprite.setPosition(glm::vec3(0,0,0));
-
-
+		if (input.isKeyPressed(GLFW_KEY_A)) sprite.setPosition(glm::vec3(sprite.getPosition().x - speed * window.deltaTime(), sprite.getPosition().y, sprite.getPosition().z));
+		if (input.isKeyPressed(GLFW_KEY_D)) sprite.setPosition(glm::vec3(sprite.getPosition().x + speed * window.deltaTime(), sprite.getPosition().y, sprite.getPosition().z));
+		if (input.isKeyPressed(GLFW_KEY_W)) sprite.setPosition(glm::vec3(sprite.getPosition().x, sprite.getPosition().y + speed * window.deltaTime(), sprite.getPosition().z));
+		if (input.isKeyPressed(GLFW_KEY_S)) sprite.setPosition(glm::vec3(sprite.getPosition().x, sprite.getPosition().y - speed * window.deltaTime(), sprite.getPosition().z));
 
 		window.clear();
 

@@ -86,11 +86,19 @@
     <ClInclude Include="src\SampsonCoreHeaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\utils\stats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\text\textRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\textured.vert" />
     <None Include="src\shaders\textured.frag" />
     <None Include="src\shaders\basic.vert" />
     <None Include="src\shaders\basic.frag" />
+    <None Include="src\shaders\text.vert" />
+    <None Include="src\shaders\text.frag" />
   </ItemGroup>
 </Project>
