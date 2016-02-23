@@ -10,7 +10,7 @@ Basic 2D/ 3D OpenGL Game Engine
 
 **VC++ Directories**
 
-- Include Directories -> `$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLM\include;$(SolutionDir)Dependencies\FreeImage\include;$(IncludePath)`
+- Include Directories -> `$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLM\include;$(SolutionDir)Dependencies\FreeImage\include;$(SolutionDir)Dependencies\FreeType2;$(IncludePath)`
 - Library Directories -> `$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\FreeImage\lib;$(LibraryPath)`
 
 **C/C++ -> Preprocessor**
