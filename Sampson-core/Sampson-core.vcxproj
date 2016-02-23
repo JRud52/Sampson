@@ -156,6 +156,7 @@
     <ClInclude Include="src\graphics\window.h" />
     <ClInclude Include="src\input\input.h" />
     <ClInclude Include="src\math\vec2.h" />
+    <ClInclude Include="src\SampsonCoreHeaders.h" />
     <ClInclude Include="src\utils\fileutils.h" />
   </ItemGroup>
   <ItemGroup>

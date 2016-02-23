@@ -8,26 +8,27 @@
 
 class Renderable2D
 {
-protected:
-	glm::vec3 m_Position;
-	glm::vec2 m_Size;
-	glm::vec4 m_Color;
+public:
+	glm::vec3 position;
+	glm::vec2 scale;
+	glm::vec4 color;
 
+protected:
 	VertexArray* m_VertexArray;
 	IndexBuffer* m_IndexBuffer;
 	Shader& m_Shader;
 
 public:
 	//initialize the renderable2d
-	Renderable2D(glm::vec3 position, glm::vec2 size, glm::vec4 color, Shader& shader)
-		: m_Position(position), m_Size(size), m_Color(color), m_Shader(shader)
+	Renderable2D(glm::vec3 position, glm::vec2 scale, glm::vec4 color, Shader& shader)
+		: position(position), scale(scale), color(color), m_Shader(shader)
 	{
 		m_VertexArray = new VertexArray();
 		GLfloat vertices[] = {
 			0, 0, 0,
-			0, size.y, 0,
-			size.x, size.y, 0,
-			size.x, 0, 0
+			0, scale.y, 0,
+			scale.x, scale.y, 0,
+			scale.x, 0, 0
 		};
 
 		GLfloat colors[] = {
@@ -56,8 +57,9 @@ public:
 
 	inline Shader& getShader() const { return m_Shader; }
 
-	inline const glm::vec3& getPosition() const { return m_Position; }
-	inline const glm::vec2& getSize() const { return m_Size; }
-	inline const glm::vec4& getColor() const { return m_Color; }
+	inline const glm::vec3& getPosition() const { return position; }
+	inline const glm::vec2& getScale() const { return scale; }
+	inline const glm::vec4& getColor() const { return color; }
 
+	// const void setPosition(glm::vec3 position) { this->position = position; }
 };

@@ -5,8 +5,6 @@
 #include <GLFW/glfw3.h>
 #include <GLM/glm.hpp>
 
-
-
 class Window
 {
 private:
