@@ -16,3 +16,5 @@
 
 #include "graphics/simple2drenderer.h"
 #include "graphics/renderable2d.h"
+
+//#include "text/textRenderer.h"

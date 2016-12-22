@@ -16,7 +16,11 @@ public:
 
 		// If last prinf() was more than 1 sec ago printf and reset timer
 		if (currentTime - lastTime >= 1.0) {
-			printf("%f ms/frame\n", 1000.0 / double(nbFrames));
+			system("cls");
+			//print opengl version to console 
+			//printf("OpenGL %s\n\n", glGetString(GL_VERSION));
+			//print fps
+			printf("%f fps\n", double(nbFrames));
 			nbFrames = 0;
 			lastTime += 1.0;
 		}

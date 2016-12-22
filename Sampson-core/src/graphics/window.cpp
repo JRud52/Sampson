@@ -50,7 +50,7 @@ bool Window::Init()
 	//glfwSetWindowSizeCallback(m_Window, window_resize);                       //uncomment this line for resize functionality
 
 	//enable face culling and blending
-	//glEnable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -60,9 +60,6 @@ bool Window::Init()
 		std::cout << "Could not initialize GLEW!" << std::endl;
 		return false;
 	}
-
-	//print opengl version to console 
-	std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
 
 	//initialize deltatime
 	m_DeltaTime = 0.0f;

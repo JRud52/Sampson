@@ -29,6 +29,8 @@ public:
 	void enable() const;
 	void disable() const;
 
+	GLuint getProgram() { return m_ShaderID; };
+
 private:
 	GLuint load();
 	GLint getUniformLocation(const GLchar* name);
